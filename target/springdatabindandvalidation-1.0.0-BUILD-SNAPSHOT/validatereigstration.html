@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+<head><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script></head>
+
+<body>
+
+	<h2>Form Submission</h2>
+<form id = "register1" method = "POST" action="validateregister.do">
+	<label>Name</label>
+	<input type="text" name="name"><br>
+	<label>Age</label>
+	<input type="text" name="age"><br>
+	<label>Date of Birth</label>
+	<input type="text" name="dob"><br>
+	<label>City</label>
+	<input type="text" name="address.city"><br>
+	<label>State</label>
+	<input type="text" name="address.state"><br>
+	<label>Pincode</label>
+	<input type="text" name="address.pincode"><br>
+	<select name= "languages">
+	<option value = "Java">Java</option>
+	
+	<option value = "Spring">Spring</option>
+	
+	<option value = "Hibernate">Hibernate</option>
+	</select>
+	<input type="submit" value="Submit">
+</form>
+
+
+</body>
+<script type="text/javascript">
+
+/* function sendData() {
+	var input = {
+			"name": $("#name").val(),
+			"age" :  $("#age").val(),
+			"dob" :  $("#dob").val(),
+			"address.city" :  $("#city").val(),
+			"address.state" :  $("#state").val(),
+			"address.pincode" :  $("#pincode").val(),
+			"languages":["Java","C++","Python"]
+	}
+	alert(JSON.stringify(input))
+	var request = $.ajax({
+		"url" : "register.do",
+		"type" : "post",
+		"headers" : {
+			"content-type" : "application/json",
+			"data-type" : "application/json"
+		},
+		"data": JSON.stringify(input)
+	});
+	request.done(function(data){
+		alert(data);
+	});
+} */
+var frm = $('#register1');
+
+frm.submit(function (e) {
+
+    e.preventDefault();
+
+    $.ajax({
+        type: frm.attr('method'),
+        url: frm.attr('action'),
+        data: frm.serialize(),
+        success: function (data) {
+            alert('Submission was successful.');
+            console.log(data);
+        },
+        error: function (data) {
+        	alert('An error occurred.');
+            console.log(data.responseText);
+        },
+    });
+});
+
+</script>
+</html>
